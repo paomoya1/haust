@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>河南科技大学2026级新生入学全指南</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            haust: {
+              red: '#9f1f2f',
+              deep: '#12324a',
+              ink: '#17212b',
+              soft: '#f4f8fb',
+              mint: '#dff3ec',
+              gold: '#d99a2b'
+            }
+          },
+          boxShadow: {
+            soft: '0 18px 50px rgba(18, 50, 74, 0.12)'
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root { --nav-h: 72px; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #17212b;
+      background: #f7fafc;
+      line-height: 1.7;
+      animation: pageIn .7s ease both;
+    }
+    @keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes floatIn { from { opacity: 0; transform: translate3d(0, 22px, 0); } to { opacity: 1; transform: translate3d(0, 0, 0); } }
+    @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+    .reveal { opacity: 0; transform: translate3d(0, 24px, 0); transition: opacity .7s ease, transform .7s ease; will-change: opacity, transform; }
+    .reveal.show { opacity: 1; transform: translate3d(0, 0, 0); }
+    .glass { background: rgba(255,255,255,.86); backdrop-filter: blur(14px); }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(12, 35, 52, .86), rgba(12, 35, 52, .55), rgba(12, 35, 52, .22));
+      z-index: 1;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 32%;
+      background: linear-gradient(180deg, rgba(247,250,252,0), #f7fafc 92%);
+      z-index: 1;
+    }
+    .section-band { scroll-margin-top: calc(var(--nav-h) + 24px); }
+    .guide-page { display: none; }
+    .guide-page.active { display: block; animation: floatIn .45s ease both; }
+    .guide-tab.active { background: #9f1f2f; color: #fff; border-color: #9f1f2f; box-shadow: 0 12px 24px rgba(159,31,47,.18); }
+    .nav-link.active { color: #9f1f2f; }
+    .nav-link.active::after { width: 100%; }
+    .nav-link::after { content: ""; display: block; width: 0; height: 2px; background: #9f1f2f; transition: width .25s ease; }
+    .nav-link:hover::after { width: 100%; }
+    .tip { border-left: 4px solid #d99a2b; background: #fff8e8; }
+    .notice { border-left: 4px solid #9f1f2f; background: #fff1f3; }
+    .suggest { border-left: 4px solid #1b8a68; background: #eefaf6; }
+    .image-shell { overflow: hidden; background: #e8eef2; position: relative; }
+    .image-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.36), transparent);
+      animation: shimmer 2.8s infinite;
+      pointer-events: none;
+    }
+    .image-shell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s ease; cursor: zoom-in; }
+    .image-shell:hover img { transform: scale(1.045); }
+    .modal { opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+    .modal.open { opacity: 1; pointer-events: auto; }
+    .side-menu { transform: translateX(100%); transition: transform .28s ease; }
+    .side-menu.open { transform: translateX(0); }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { min-width: 760px; }
+    .back-top { opacity: 0; transform: translateY(16px) scale(.92); pointer-events: none; transition: all .25s ease; }
+    .back-top.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .back-top:hover { transform: translateY(-2px) scale(1.06); }
+    @media (max-width: 768px) { :root { --nav-h: 64px; } .hero::before { background: rgba(12,35,52,.72); } }
+  </style>
+</head>
+<body>
+  <!-- 顶部固定导航 -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/70">
+    <nav class="mx-auto flex h-16 md:h-[72px] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <a href="#top" class="flex items-center gap-3">
+        <img src="uploads/校徽.png" alt="河南科技大学校徽" class="h-10 w-10 rounded-full bg-white object-contain p-1 shadow-sm" loading="lazy" />
+        <span class="text-sm font-black text-haust-deep sm:text-base">河南科技大学新生入学指南</span>
+      </a>
+      <div class="hidden items-center gap-7 text-sm font-semibold text-slate-700 lg:flex">
+        <a class="nav-link" href="#overview">指南总览</a>
+        <a class="nav-link" href="#process">报到流程</a>
+        <a class="nav-link" href="#guide">26项指南</a>
+        <a class="nav-link" href="#maps">校区地图</a>
+        <a class="nav-link" href="#official">官方平台</a>
+      </div>
+      <button id="menuBtn" class="grid h-10 w-10 place-items-center rounded-md border border-slate-200 bg-white text-haust-deep lg:hidden" aria-label="打开导航菜单">
+        <span class="text-2xl leading-none">☰</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- 移动端侧边导航 -->
+  <div id="menuMask" class="fixed inset-0 z-50 hidden bg-slate-950/40 lg:hidden"></div>
+  <aside id="sideMenu" class="side-menu fixed right-0 top-0 z-50 h-full w-72 bg-white p-6 shadow-soft lg:hidden">
+    <div class="mb-8 flex items-center justify-between">
+      <strong class="text-haust-deep">快速导航</strong>
+      <button id="closeMenu" class="grid h-9 w-9 place-items-center rounded-md bg-slate-100" aria-label="关闭导航菜单">×</button>
+    </div>
+    <div class="grid gap-4 text-sm font-semibold text-slate-700">
+      <a href="#overview" class="mobile-link">指南总览</a>
+      <a href="#process" class="mobile-link">报到流程</a>
+      <a href="#guide" class="mobile-link">26项指南</a>
+      <a href="#maps" class="mobile-link">校区地图</a>
+      <a href="#official" class="mobile-link">官方平台</a>
+    </div>
+  </aside>
+
+  <main id="top">
+    <!-- 首屏 Hero -->
+    <section class="hero relative min-h-[88vh] overflow-hidden pt-16 md:pt-[72px]">
+      <img src="uploads/大门.jpg" alt="河南科技大学校门" class="absolute inset-0 h-full w-full object-cover" loading="eager" />
+      <div class="relative z-10 mx-auto flex min-h-[calc(88vh-72px)] max-w-7xl items-center px-4 py-16 sm:px-6 lg:px-8">
+        <div class="max-w-3xl text-white">
+          <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/12 px-4 py-2 text-sm font-semibold backdrop-blur">开元 · 西苑 双校区攻略</div>
+          <h1 class="text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">河南科技大学2026级新生入学全指南</h1>
+          <p class="mt-6 max-w-2xl text-lg text-white/88 sm:text-xl">从抵达校园、报到入住、军训考试，到宿舍生活、校园网络、奖学金政策，一页掌握新生入学关键事项。</p>
+          <div class="mt-9 flex flex-wrap gap-3">
+            <a href="#guide" class="rounded-md bg-haust-red px-5 py-3 text-sm font-bold text-white shadow-lg shadow-red-950/20 transition hover:-translate-y-0.5 hover:bg-red-800">查看26项指南</a>
+            <a href="#process" class="rounded-md border border-white/45 bg-white/12 px-5 py-3 text-sm font-bold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20">先看报到流程</a>
+            <a href="#maps" class="rounded-md border border-white/45 bg-white/12 px-5 py-3 text-sm font-bold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20">查看校区地图</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 总览卡片 -->
+    <section id="overview" class="section-band mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+      <div class="reveal grid gap-6 lg:grid-cols-[1.2fr_.8fr]">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-haust-red">Freshman Guide</p>
+          <h2 class="mt-2 text-3xl font-black text-haust-deep sm:text-4xl">入学前先抓住这几件大事</h2>
+          <p class="mt-4 text-slate-600">新生最容易紧张的地方，通常不是“事情太难”，而是信息太散。这个网站把入校路线、报到步骤、住宿生活、学习安排和官方平台合在一起，按模块查看即可。</p>
+        </div>
+        <div class="rounded-lg bg-white p-6 shadow-soft">
+          <h3 class="text-lg font-black text-haust-deep">学校地址</h3>
+          <div class="mt-4 grid gap-3 text-sm text-slate-700">
+            <p><strong>开元校区：</strong>河南省洛阳市洛龙区开元大道263号</p>
+            <p><strong>西苑校区：</strong>河南省洛阳市涧西区西苑路48号</p>
+            <p><strong>主要入口：</strong>正北门、小北门、龙门实验室南门；自驾入校建议从正北门通行。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 报到流程 -->
+    <section id="process" class="section-band bg-white py-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-haust-red">Check-in Process</p>
+          <h2 class="mt-2 text-3xl font-black text-haust-deep sm:text-4xl">新生报到流程</h2>
+          <p class="mt-4 text-slate-600">报到当天学校会安排志愿者引导，新生按顺序完成“到校、学院报到、宿舍登记、收尾准备”即可。</p>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <article class="reveal rounded-lg border border-slate-100 bg-haust-soft p-6 transition hover:-translate-y-1 hover:shadow-soft">
+            <span class="text-3xl font-black text-haust-red">01</span>
+            <h3 class="mt-3 text-xl font-black text-haust-deep">抵达校园</h3>
+            <p class="mt-3 text-sm text-slate-600">洛阳龙门高铁站、洛阳火车站可寻找红色志愿服志愿者，按引导乘坐通勤车辆入校；自驾新生从正北门入校更顺畅。</p>
+          </article>
+          <article class="reveal rounded-lg border border-slate-100 bg-haust-soft p-6 transition hover:-translate-y-1 hover:shadow-soft">
+            <span class="text-3xl font-black text-haust-red">02</span>
+            <h3 class="mt-3 text-xl font-black text-haust-deep">学院报到</h3>
+            <p class="mt-3 text-sm text-slate-600">入校后乘校园公交前往学院报到点，在红色帐篷服务点凭录取通知书办理手续，并领取校园一卡通。</p>
+          </article>
+          <article class="reveal rounded-lg border border-slate-100 bg-haust-soft p-6 transition hover:-translate-y-1 hover:shadow-soft">
+            <span class="text-3xl font-black text-haust-red">03</span>
+            <h3 class="mt-3 text-xl font-black text-haust-deep">宿舍登记</h3>
+            <p class="mt-3 text-sm text-slate-600">到对应宿舍楼一楼宿管值班室签到、加入宿舍社群、领取钥匙，再按需绑定饮水机、办理空调使用。</p>
+          </article>
+          <article class="reveal rounded-lg border border-slate-100 bg-haust-soft p-6 transition hover:-translate-y-1 hover:shadow-soft">
+            <span class="text-3xl font-black text-haust-red">04</span>
+            <h3 class="mt-3 text-xl font-black text-haust-deep">完成收尾</h3>
+            <p class="mt-3 text-sm text-slate-600">手续办完后可自由进出校园，生活用品可在校内超市或周边商圈补齐，晚上注意参加班级首次班会。</p>
+          </article>
+        </div>
+        <div class="reveal mt-8 grid gap-4 md:grid-cols-3">
+          <div class="tip rounded-md p-5 text-sm text-slate-700"><strong>时间建议：</strong>尽量避开11:00-13:00高温换班高峰、17:00-18:00志愿者下班时段。</div>
+          <div class="notice rounded-md p-5 text-sm text-slate-700"><strong>材料提醒：</strong>班会通常需提交纸质档案、身份证、录取通知书、团员档案等材料。</div>
+          <div class="suggest rounded-md p-5 text-sm text-slate-700"><strong>现金备用：</strong>军训服装、空调押金等场景可能需要现金，建议准备200-300元小额现金。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 26项指南分页 -->
+    <section id="guide" class="section-band mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="reveal flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-haust-red">26 Guides</p>
+          <h2 class="mt-2 text-3xl font-black text-haust-deep sm:text-4xl">26个入学指南</h2>
+          
+        </div>
+        <div class="rounded-md bg-white px-4 py-3 text-sm font-bold text-haust-deep shadow-sm">当前：<span id="pageCounter">1 / 26</span></div>
+      </div>
+
+      <div id="guideTabs" class="reveal mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"></div>
+
+      <div class="reveal mt-8 rounded-lg bg-white p-5 shadow-soft sm:p-8">
+        <div id="guidePages"></div>
+        <div class="mt-8 flex items-center justify-between gap-3 border-t border-slate-100 pt-6">
+          <button id="prevGuide" class="rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-haust-deep transition hover:-translate-y-0.5 hover:border-haust-red hover:text-haust-red">上一页</button>
+          <button id="nextGuide" class="rounded-md bg-haust-red px-4 py-2 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-red-800">下一页</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 校区地图 -->
+    <section id="maps" class="section-band bg-white py-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-haust-red">Campus Maps</p>
+          <h2 class="mt-2 text-3xl font-black text-haust-deep sm:text-4xl">校区地图概况</h2>
+          <p class="mt-4 text-slate-600">地图图片支持点击放大查看，适合报到前先熟悉校门、教学区、宿舍区和餐厅位置。</p>
+        </div>
+        <div class="mt-10 grid gap-6 lg:grid-cols-2">
+          <article class="reveal rounded-lg border border-slate-100 bg-haust-soft p-5">
+            <div class="image-shell aspect-[4/3] rounded-md"><img src="uploads/开元地图.png" alt="河南科技大学开元校区地图" loading="lazy" data-zoom /></div>
+            <h3 class="mt-5 text-xl font-black text-haust-deep">开元校区</h3>
+            <p class="mt-2 text-sm text-slate-600">位于洛龙区核心地段，占地面积约3560亩，配套图书馆、公共教学楼、龙门实验室、大型体育场等设施。</p>
+          </article>
+          <article class="reveal rounded-lg border border-slate-100 bg-haust-soft p-5">
+            <div class="image-shell aspect-[4/3] rounded-md"><img src="uploads/西苑地图.png" alt="河南科技大学西苑校区地图" loading="lazy" data-zoom /></div>
+            <h3 class="mt-5 text-xl font-black text-haust-deep">西苑校区</h3>
+            <p class="mt-2 text-sm text-slate-600">位于涧西区西苑路，占地面积约1500亩，配套工程训练中心、体育馆等特色教学文体设施。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 表格信息 -->
+    <section class="section-band mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div class="grid gap-8 lg:grid-cols-2">
+        <article class="reveal rounded-lg bg-white p-6 shadow-soft">
+          <h2 class="text-2xl font-black text-haust-deep">宿舍分配明细表</h2>
+          <p class="mt-2 text-sm text-slate-600">以下为页面内置示例化明细，具体楼栋以学院和辅导员最终通知为准。</p>
+          <div class="table-wrap mt-5">
+            <table class="w-full border-collapse text-left text-sm">
+              <thead class="bg-haust-deep text-white"><tr><th class="p-3">校区</th><th class="p-3">学院类别</th><th class="p-3">性别</th><th class="p-3">宿舍楼</th><th class="p-3">床位类型</th><th class="p-3">卫浴</th></tr></thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="p-3">开元</td><td class="p-3">软件工程等工科专业</td><td class="p-3">男/女</td><td class="p-3">新建宿舍楼、菁园片区</td><td class="p-3">上床下桌</td><td class="p-3">部分独卫</td></tr>
+                <tr><td class="p-3">开元</td><td class="p-3">理学、医学、管理类</td><td class="p-3">男/女</td><td class="p-3">嘉园、乾园片区</td><td class="p-3">标准床铺</td><td class="p-3">公共或独卫</td></tr>
+                <tr><td class="p-3">西苑</td><td class="p-3">机电、车辆等相关专业</td><td class="p-3">男/女</td><td class="p-3">南苑、北苑宿舍区</td><td class="p-3">标准床铺</td><td class="p-3">公共卫浴</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+        <article class="reveal rounded-lg bg-white p-6 shadow-soft">
+          <h2 class="text-2xl font-black text-haust-deep">校园作息时段表</h2>
+          <p class="mt-2 text-sm text-slate-600">冬季10月至次年4月下午上课时间调整为14:00，夏季为14:30。</p>
+          <div class="table-wrap mt-5">
+            <table class="w-full border-collapse text-left text-sm">
+              <thead class="bg-haust-deep text-white"><tr><th class="p-3">事项</th><th class="p-3">时间</th><th class="p-3">说明</th></tr></thead>
+              <tbody class="divide-y divide-slate-100">
+                <tr><td class="p-3">早餐</td><td class="p-3">6:30-8:30</td><td class="p-3">各餐厅陆续开放</td></tr>
+                <tr><td class="p-3">上午课程</td><td class="p-3">8:00-12:00</td><td class="p-3">按课表到指定教室</td></tr>
+                <tr><td class="p-3">午休</td><td class="p-3">12:00-14:00/14:30</td><td class="p-3">夏冬季略有差异</td></tr>
+                <tr><td class="p-3">晚自习</td><td class="p-3">19:00-21:00</td><td class="p-3">大一新生统一开展</td></tr>
+                <tr><td class="p-3">安静作息</td><td class="p-3">23:30后</td><td class="p-3">校园无统一熄灯制度</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 官方平台 -->
+    <section id="official" class="section-band bg-haust-deep py-16 text-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal max-w-3xl">
+          <p class="text-sm font-bold uppercase tracking-[.16em] text-haust-gold">Official Links</p>
+          <h2 class="mt-2 text-3xl font-black sm:text-4xl">学校官方平台</h2>
+          <p class="mt-4 text-white/75">各类通知公告、教学资源和校园服务以官方平台为准，重要通知建议重点关注“通知公告”栏目。</p>
+        </div>
+        <div class="mt-9 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <a class="reveal rounded-lg border border-white/10 bg-white/8 p-5 transition hover:-translate-y-1 hover:bg-white/12" href="https://www.haust.edu.cn" target="_blank" rel="noopener noreferrer"><strong>学校主官网</strong><span class="mt-2 block text-sm text-white/70">https://www.haust.edu.cn</span></a>
+          <a class="reveal rounded-lg border border-white/10 bg-white/8 p-5 transition hover:-translate-y-1 hover:bg-white/12" href="https://jwc.haust.edu.cn" target="_blank" rel="noopener noreferrer"><strong>教务处官网</strong><span class="mt-2 block text-sm text-white/70">https://jwc.haust.edu.cn</span></a>
+          <a class="reveal rounded-lg border border-white/10 bg-white/8 p-5 transition hover:-translate-y-1 hover:bg-white/12" href="https://lib.haust.edu.cn" target="_blank" rel="noopener noreferrer"><strong>图书馆官网</strong><span class="mt-2 block text-sm text-white/70">https://lib.haust.edu.cn</span></a>
+          <a class="reveal rounded-lg border border-white/10 bg-white/8 p-5 transition hover:-translate-y-1 hover:bg-white/12" href="https://download.haust.edu.cn/haust/getApp/" target="_blank" rel="noopener noreferrer"><strong>我i科大APP</strong><span class="mt-2 block text-sm text-white/70">官方下载入口</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 底部页脚 -->
+  <footer class="bg-slate-950 px-4 py-8 text-center text-sm text-slate-400">
+    <p>河南科技大学2026级新生入学指南 · 信息请以学校官方通知和学院辅导员安排为准</p>
+    <p class="mt-2">© 2026 Henan University of Science and Technology Freshman Guide</p>
+  </footer>
+
+  <!-- 图片放大弹窗与返回顶部 -->
+  <div id="imageModal" class="modal fixed inset-0 z-[70] grid place-items-center bg-slate-950/86 p-4">
+    <button id="closeModal" class="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-md bg-white text-xl text-haust-deep" aria-label="关闭图片预览">×</button>
+    <img id="modalImage" src="" alt="放大查看" class="max-h-[88vh] max-w-[94vw] rounded-lg bg-white object-contain shadow-soft" />
+  </div>
+  <button id="backTop" class="back-top fixed bottom-5 right-5 z-50 grid h-12 w-12 place-items-center rounded-full bg-haust-red text-xl font-black text-white shadow-soft" aria-label="返回顶部">↑</button>
+
+  <script>
+    const guides = [
+      { title: '学校地址', body: ['开元校区位于河南省洛阳市洛龙区开元大道263号，西苑校区位于河南省洛阳市涧西区西苑路48号。', '校园主要出入口包括正北门、小北门、龙门实验室南门。自驾入校建议优先从正北门通行。'], type: 'tip', tip: '出发前把校区名称和学院通知核对清楚，避免走错校区。' },
+      { title: '新生报到流程', body: ['抵达洛阳龙门高铁站、洛阳火车站后，可寻找身穿红色志愿服的校内志愿者。志愿者会引导乘车入校并协助搬运行李。', '入校后前往学院红色帐篷报到点，凭录取通知书办理手续并领取校园一卡通。完成后到宿舍楼一楼宿管值班室登记、领钥匙。'], type: 'notice', tip: '床位通常提前统一分配，开学前会在班级群公示，不需要抢先入住。' },
+      { title: '入学注意事项', body: ['准备专用文件袋，统一收纳身份证、录取通知书、高考准考证、户口本复印件、团员档案、一寸证件照等材料。', '报到期间手机要保持畅通，提前下载并注册“我i科大”APP，方便扫码登记、接收通知和处理校园服务。'], type: 'suggest', tip: '任何校内事务优先联系辅导员，建议保存电话并添加微信备注个人信息。' },
+      { title: '新生军训信息', body: ['军训周期共14天，计划于9月14日正式启动。训练时段为上午7:00-11:00、下午14:30-18:00。', '军训期间应做好防晒，准备水杯、软鞋垫和舒适运动鞋。身体不适要第一时间向教官报备。'], type: 'notice', tip: '军训服装通常包含上衣、短袖、帽子、腰带、裤子、鞋子，建议准备200元现金备用。' },
+      { title: '入学考试安排', body: ['新生入校一周内将组织入学测试，科目为高中数学和高中英语，每科60分钟。', '考试形式为学习通线上机考，主观题需要拍照上传。本次测试主要用于学籍信息核验和高考字迹核对，不是分班考试。'], type: 'tip', tip: '工科专业卓越工程师班通常以高考成绩为核心依据，并结合学院初筛和面试。' },
+      { title: '校园参观指南', body: ['学校支持新生及家长提前预约参观，可关注“河南科技大学”官方公众号，点击左下角访客预约入口，填报信息后等待审核。', '推荐路线为图书馆、开元会议中心、龙门实验室、学生餐厅、体育场馆、宿舍生活区、公共教学楼。'], type: 'suggest', tip: '开元广场、琴湖、图书馆顶层、工程训练中心、牡丹园都是常见打卡点。' },
+      { title: '学校官方平台', body: ['学校主官网发布官方新闻、公示公告和重要通知；教务处官网提供教学通知、选课、成绩查询、考试安排等服务；图书馆官网支持图书检索、电子资源查阅和座位预约。', '校园网环境访问校内官网速度更快，统一身份认证登录后可使用更多校内资源。'], type: 'notice', tip: '学校主官网：https://www.haust.edu.cn；教务处：https://jwc.haust.edu.cn；图书馆：https://lib.haust.edu.cn。' },
+      { title: '宿舍住宿条件', body: ['宿舍标准单人床尺寸为2米×0.9米。全校宿舍配备空调和暖气，暖气免费使用，空调需缴费和缴纳押金。', '全校教学区、宿舍区覆盖校园网络，有线网络免费使用，无线网络可按需付费开通。'], type: 'tip', tip: '2025级软件工程专业新生入住开元校区全新宿舍楼，采用上床下桌布局。' },
+      { title: '校区地图概况', body: ['开元校区占地面积约3560亩，配套图书馆、公共教学楼、龙门实验室、大型体育场等设施。', '西苑校区占地面积约1500亩，配套工程训练中心、体育馆等教学文体设施。'], type: 'suggest', tip: '本页下方已放入开元校区和西苑校区地图，点击图片可以放大查看。' },
+      { title: '校园一卡通', body: ['校园一卡通是学生在校通用凭证，可用于就餐、洗浴、门禁通行、体测核验等场景。', '充值可通过“我i科大”APP使用微信或支付宝完成。挂失补办流程为APP线上挂失、缴费、到自助补卡机领取新卡。'], type: 'notice', tip: '补卡点包括开元校区图书馆二楼、嘉园食堂一楼，西苑校区四号楼一楼。' },
+      { title: '我i科大APP', body: ['“我i科大”是学校官方智慧校园服务平台，整合生活、学习、通知和校园服务。', '常用功能包括校园卡充值、宿舍电费与空调电费缴纳、课表查询、校内通知接收、校园服务办理等。'], type: 'tip', tip: '官方下载地址：https://download.haust.edu.cn/haust/getApp/' },
+      { title: '校园快递服务', body: ['开元校区快递站点包括嘉园站点、菁园6号楼、菁园11号楼、乾园地下商业街、乾园小木屋等。', '西苑校区在南苑体育馆旁、南苑篮球场旁、北苑22号街坊均设有菜鸟驿站。'], type: 'suggest', tip: '报到前寄送行李时，务必写清校区、宿舍区、姓名和手机号。' },
+      { title: '校园社团活动', body: ['学校社团覆盖学术科创、文体艺术、体育运动、公益服务四大类别。开学后各社团会进入班级开展招新宣讲和才艺展示。', '热门社团包括科技创新协会、电子设计协会、舞蹈社、书法协会、篮球协会、羽毛球协会、菁年志愿者协会等。'], type: 'tip', tip: '社团选择看兴趣和精力，不建议一开始加入过多。' },
+      { title: '奖学金评定政策', body: ['学校奖学金体系包括国家奖学金、国家励志奖学金和校级奖学金。奖学金申请硬性要求之一是体测成绩不低于80分。', '国家奖学金年度奖金8000元，国家励志奖学金年度奖金5000元，校级奖学金通常为300-1000元。'], type: 'notice', tip: '奖学金不仅看成绩，也会关联体测、综合表现和学院具体规则。' },
+      { title: '保研政策说明', body: ['河南科技大学具备推荐优秀应届本科毕业生免试攻读硕士研究生资格。', '核心申请条件包括专业综合成绩排名前15%、通过大学英语四级考试、无违纪处分记录、综合素质评价优良。'], type: 'suggest', tip: '官方章程：https://yjsc.haust.edu.cn/info/1033/6702.htm' },
+      { title: '转专业规定', body: ['转专业通常在大一下学期开学期间统一受理申请，学校依据大一综合成绩排序遴选候选人。', '同一学科门类院内转专业无名额限制；对目标专业具备专项特长的学生，可申请一年试读资格。'], type: 'tip', tip: '各学院政策会有差异，最终以校园网和学院官网通知为准。' },
+      { title: '校园网使用', body: ['校园WiFi名称为HAUST-WIFI，登录账号为个人学号，初始密码为身份证后6位，字母X需大写。', '手机或电脑连接校园WiFi后，自动跳转或手动访问认证页面，输入账号密码即可使用。'], type: 'notice', tip: '个人设备单独开通校园网约40元/月，办理校园电话卡可能赠送宽带。' },
+      { title: '校园作息时间', body: ['学校实行标准化作息制度，冬季10月至次年4月下午上课时间调整为14:00，夏季为14:30。', '校园无统一熄灯制度，23:30后建议保持宿舍安静；考试周图书馆开放时间通常延长至22:30。'], type: 'suggest', tip: '下方作息表可以横向滚动查看，手机上也能完整阅读。' },
+      { title: '早晚自习安排', body: ['大一新生设置早晚自习，大二起通常不再统一强制。早自习仅西苑校区大一新生参与，时段7:00-7:30。', '晚自习开元、西苑双校区大一统一开展，时段19:00-21:00，固定教室完成作业、复习和预习。'], type: 'tip', tip: '自习实行签到考勤，请假需提前报备。' },
+      { title: '宿舍水电费', body: ['日常洗漱用水免费；饮用冷水0.2元/升，饮用热水0.3元/升，可通过完美校园APP扫码消费。', '日常照明电费0.8元/度，空调电费单独计量，收费标准0.56元/度。'], type: 'suggest', tip: '宿舍电费可在“我i科大”APP充值，充值后约5分钟到账。' },
+      { title: '宿舍空调规范', body: ['空调启用流程为宿舍全员协商一致、到宿管值班室申领遥控器、缴纳2000元设备押金、签订使用协议、充值空调电费。', '设备押金毕业全额退还，日常设备维护免费，仅收取实际使用电费。'], type: 'notice', tip: '离开宿舍超1小时建议断电，无人状态下及时关闭空调。' },
+      { title: '校园餐饮服务', body: ['开元校区设有嘉园、菁园、乾园三大学生餐厅，菜品丰富，营业时间通常为6:30-21:00。', '就餐可使用校园一卡通刷卡，也可使用手机付款码支付。校园卡充值可通过“我i科大”APP完成。'], type: 'tip', tip: '刚入学可以先少量充值，熟悉消费节奏后再按需追加。' },
+      { title: '校园洗浴服务', body: ['菁园宿舍标配独立洗浴，开放时段12:00-14:00、17:00-23:30，收费0.05元/分钟，可用校园卡刷卡。', '各宿舍区中心设有公共浴室，开放时段12:00-21:00，配备储物柜。'], type: 'suggest', tip: '公共浴室建议自备拖鞋、洗漱用品、浴巾和锁具。' },
+      { title: '校园医疗服务', body: ['开元校区校医院位于体育馆南侧，日常门诊8:00-22:00，急诊24小时值守，咨询电话64231849。', '西苑校区校医院位于青滇路以南，提供日常门诊、急诊救治、疫苗接种和健康咨询等服务。'], type: 'notice', tip: '校外就医报销需留存发票、病历、处方等凭证。' },
+      { title: '体质测试说明', body: ['体测每学期一次，通常在10月中旬和4月上旬进行。测试项目包括BMI、肺活量、坐位体前屈、立定跳远、50米、长跑等。', '测试需携带校园一卡通或身份证，穿戴运动装备并提前热身。特殊疾病学生可申请免测。'], type: 'tip', tip: '体测成绩会影响奖学金和评优评先，建议平时保持基础运动。' },
+      { title: '校园电话卡服务', body: ['校园营业厅提供39元套餐，可免费赠送校园宽带，适合有长期联网需求的新生。', '是否办理电话卡可按个人通信需求决定，办理前注意确认套餐内容、合约周期和宽带权益。'], type: 'suggest', tip: '如果只是偶尔用网，可以先体验校园网，再决定是否办理套餐。' }
+    ];
+
+    const guideTabs = document.getElementById('guideTabs');
+    const guidePages = document.getElementById('guidePages');
+    const pageCounter = document.getElementById('pageCounter');
+    let currentGuide = 0;
+
+    function renderGuides() {
+      guideTabs.innerHTML = guides.map((guide, index) => `<button class="guide-tab rounded-md border border-slate-200 bg-white px-3 py-3 text-left text-sm font-bold text-slate-700 transition hover:-translate-y-0.5 hover:border-haust-red" data-index="${index}">${String(index + 1).padStart(2, '0')} ${guide.title}</button>`).join('');
+      guidePages.innerHTML = guides.map((guide, index) => `
+        <article class="guide-page" data-index="${index}">
+          <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div>
+              <p class="text-sm font-bold text-haust-red">指南 ${String(index + 1).padStart(2, '0')}</p>
+              <h3 class="mt-1 text-2xl font-black text-haust-deep sm:text-3xl">${guide.title}</h3>
+            </div>
+            <span class="w-fit rounded-full bg-haust-soft px-4 py-2 text-sm font-bold text-haust-deep">${index + 1} / ${guides.length}</span>
+          </div>
+          <div class="mt-6 grid gap-4 text-slate-650">
+            ${guide.body.map(p => `<p>${p}</p>`).join('')}
+          </div>
+          <div class="${guide.type} mt-6 rounded-md p-5 text-sm text-slate-700"><strong>温馨提示：</strong>${guide.tip}</div>
+        </article>
+      `).join('');
+      guideTabs.addEventListener('click', event => {
+        const button = event.target.closest('button[data-index]');
+        if (!button) return;
+        setGuide(Number(button.dataset.index));
+      });
+      setGuide(0);
+    }
+
+    function setGuide(index) {
+      currentGuide = (index + guides.length) % guides.length;
+      document.querySelectorAll('.guide-tab').forEach((tab, i) => tab.classList.toggle('active', i === currentGuide));
+      document.querySelectorAll('.guide-page').forEach((page, i) => page.classList.toggle('active', i === currentGuide));
+      pageCounter.textContent = `${currentGuide + 1} / ${guides.length}`;
+    }
+
+    document.getElementById('prevGuide').addEventListener('click', () => setGuide(currentGuide - 1));
+    document.getElementById('nextGuide').addEventListener('click', () => setGuide(currentGuide + 1));
+    renderGuides();
+
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    const menuBtn = document.getElementById('menuBtn');
+    const closeMenu = document.getElementById('closeMenu');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuMask = document.getElementById('menuMask');
+    function openMenu() { sideMenu.classList.add('open'); menuMask.classList.remove('hidden'); }
+    function hideMenu() { sideMenu.classList.remove('open'); menuMask.classList.add('hidden'); }
+    menuBtn.addEventListener('click', openMenu);
+    closeMenu.addEventListener('click', hideMenu);
+    menuMask.addEventListener('click', hideMenu);
+    document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', hideMenu));
+
+    const backTop = document.getElementById('backTop');
+    backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    const sections = [...document.querySelectorAll('section[id]')];
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    function updateScrollState() {
+      backTop.classList.toggle('show', window.scrollY > 300);
+      let activeId = sections[0]?.id;
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 120) activeId = section.id;
+      });
+      navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${activeId}`));
+    }
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+    updateScrollState();
+
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    document.querySelectorAll('img[data-zoom], .hero img, header img').forEach(img => {
+      img.addEventListener('click', () => {
+        modalImage.src = img.src;
+        modalImage.alt = img.alt || '图片预览';
+        modal.classList.add('open');
+      });
+    });
+    document.getElementById('closeModal').addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', event => { if (event.target === modal) modal.classList.remove('open'); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') modal.classList.remove('open'); });
+  </script>
+</body>
+</html>
